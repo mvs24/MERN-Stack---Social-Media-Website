@@ -18,10 +18,10 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Route path="/signIn" exact component={SignIn} />
+      <Route path="/" exact component={SignUp} />
       <Switch>
-        <Route path="/signIn" exact component={Auth(SignIn, false)} />
-        <Route path="/" exact component={Auth(SignUp, false)} />
-        <Route path="/home" exact component={Auth(Home, true)} />
+        <Auth path="/home" exact component={Home} />
       </Switch>
     </BrowserRouter>
   );

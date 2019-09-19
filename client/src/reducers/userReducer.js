@@ -5,6 +5,7 @@ const initialState = {
   loginError: {},
   user: null
 };
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ERRORS:
@@ -15,7 +16,7 @@ export default function(state = initialState, action) {
       case SET_CURRENT_USER:
         return {
             ...state,
-            user: action.payload,
+            user: action.payload
         }
       case LOGIN_ERROR: 
       return {

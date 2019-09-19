@@ -7,14 +7,28 @@ const Post = require("../../models/Post");
 const User = require("../../models/User");
 
 // 1
- router.get(
+router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    User.findOne({ _id: req.user._id }).then(user => {
-      Post.find({}).then(posts => {
-        res.json(posts);
-      });
+  
+    User.findOne({ _id: req.user._id })
+    .then(user => {
+      Post.find({})
+       .populate('user')
+        .then(posts => {
+          res.json(posts);
+        });
+    });
+  }
+);
+
+router.get(
+  "/:userId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.find({ user: req.params.userId }).then(posts => {
+      return res.json(posts);
     });
   }
 );
@@ -35,6 +49,8 @@ router.post(
     });
   }
 );
+
+
 
 // 3
 router.post(
@@ -79,7 +95,6 @@ router.post(
     });
   }
 );
-
 
 router.post(
   "/comment/like/:postId/:commentId",

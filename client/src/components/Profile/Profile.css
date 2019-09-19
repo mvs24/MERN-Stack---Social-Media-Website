@@ -1,0 +1,19 @@
+.image{
+    width: 6rem;
+    height: 6rem;
+}
+.profile{
+    height: 70vh;
+    background: white;
+    margin-right: 5rem;
+    margin-left: 6rem;
+    margin-top: 0.5rem;
+}
+.left{
+    display: flex;
+    
+}
+.left .img{
+    margin-right: 3rem;
+}
+

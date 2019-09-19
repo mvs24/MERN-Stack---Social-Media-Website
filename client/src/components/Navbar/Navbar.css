@@ -1,0 +1,65 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgb(146, 146, 204);
+}
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.left input {
+  margin-left: 10rem;
+  padding: 0.36rem;
+  border: none;
+  outline: none;
+  border-radius: 0.1rem;
+  margin-top: 0.1rem;
+  transition: all 0.5 ease;
+}
+.left input:focus {
+  outline: none;
+  transform: scaleX(1.2);
+}
+.left .icon {
+  position: absolute;
+  top: 20%;
+  left: 91.5%;
+  color: rgb(115, 155, 230);
+}
+.left input::placeholder {
+  margin-left: 0.4rem;
+}
+.left h1 {
+  font-size: 16px;
+  margin-left: 1rem;
+}
+.right {
+  display: flex;
+  flex-direction: row;
+}
+
+.icons {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+.iconLink {
+  color: rgb(255, 255, 255);
+}
+
+.user {
+  color: white;
+  text-decoration: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  font-style: italic;
+}
+.fullname {
+  margin-right: 2rem;
+  text-decoration: none;
+}

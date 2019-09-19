@@ -22,7 +22,6 @@ export const signInUser = (userData, history) => dispatch => {
   axios
     .post("/api/users/login", userData)
     .then(res => {
-     
       let { token } = res.data;
       localStorage.setItem("jwtToken", token);
       // set token to auth header --> function built in utils folder
@@ -48,13 +47,14 @@ export const setCurrentUser = decoded => {
   };
 };
 
-// export const signOutUser = history => dispatch => {
-//   // remove token from LS
-//   localStorage.removeItem("jwtToken");
-//   setAuthToken(false);
-//   history.push("/");
-//   dispatch({
-//     type: SET_CURRENT_USER,
-//     payload: {}
-//   });
-// };
+export const signOutUser = history => dispatch => {
+  // remove token from LS
+  localStorage.removeItem("jwtToken");
+  setAuthToken(false);
+  history.push("/");
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: {}
+  });
+};
+

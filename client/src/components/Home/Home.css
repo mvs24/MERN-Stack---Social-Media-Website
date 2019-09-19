@@ -1,0 +1,10 @@
+.homePage{
+    display: flex;
+}
+ .profile{
+    flex: 0 0 20%;
+}
+.posts{
+    flex: 0 0 45%;
+    background: white;
+} 

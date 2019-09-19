@@ -1,0 +1,17 @@
+.postfeed{
+    margin-top: 2rem;
+}
+.formPost{
+    display: flex;
+}
+.formPost button{
+    cursor: pointer;
+    width: 20%;
+    background: rgb(164, 164, 233);
+    outline: none;
+    color: white;
+}
+
+.formPost button:hover{
+    outline: none;
+}
