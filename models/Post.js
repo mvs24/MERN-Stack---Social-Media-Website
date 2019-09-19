@@ -16,12 +16,12 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "user"
       },
-      username:{
-        type:String
+      username: {
+        type: String
       },
-      lastname:{
-        type:String
-      },
+      lastname: {
+        type: String
+      }
     }
   ],
   comments: [
@@ -30,9 +30,19 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "user"
       },
+      username: {
+        type: String
+      },
+      lastname: {
+        type: String
+      },
       text: {
         type: String,
         required: true
+      },
+      date: {
+        type: Date,
+        default: Date.now
       },
       likes: [
         {
@@ -40,12 +50,12 @@ const PostSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "user"
           },
-          username:{
-            type:String
+          username: {
+            type: String
           },
-          lastname:{
-            type:String
-          },
+          lastname: {
+            type: String
+          }
         }
       ],
       reply: [
@@ -60,7 +70,7 @@ const PostSchema = new Schema({
                 type: Schema.Types.ObjectId,
                 ref: "user"
               },
-              replyToUserText:{
+              replyToUserText: {
                 type: String
               },
               likes: [
@@ -69,21 +79,21 @@ const PostSchema = new Schema({
                     type: Schema.Types.ObjectId,
                     ref: "user"
                   },
-                  username:{
+                  username: {
                     type: String
                   },
-                  lastname:{
+                  lastname: {
                     type: String
                   }
                 }
               ]
             }
           ],
-          username:{
-            type:String
+          username: {
+            type: String
           },
-          lastname:{
-            type:String
+          lastname: {
+            type: String
           },
           text: {
             type: String,
@@ -95,15 +105,14 @@ const PostSchema = new Schema({
                 type: Schema.Types.ObjectId,
                 ref: "user"
               },
-              username:{
-                type:String
+              username: {
+                type: String
               },
-              lastname:{
-                type:String
+              lastname: {
+                type: String
               }
             }
-          ],
-
+          ]
         }
       ]
     }

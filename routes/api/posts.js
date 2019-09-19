@@ -11,11 +11,9 @@ router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-  
-    User.findOne({ _id: req.user._id })
-    .then(user => {
+    User.findOne({ _id: req.user._id }).then(user => {
       Post.find({})
-       .populate('user')
+        .populate("user")
         .then(posts => {
           res.json(posts);
         });
@@ -50,24 +48,26 @@ router.post(
   }
 );
 
-
-
 // 3
 router.post(
   "/comment/:postId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     User.findOne({ _id: req.user._id }).then(user => {
-      Post.findOne({ _id: req.params.postId }).then(post => {
-        let commentText = req.body.commentText;
-        post.comments.unshift({
-          user,
-          text: commentText
+      Post.findOne({ _id: req.params.postId })
+        .populate("user")
+        .then(post => {
+          let commentText = req.body.commentText;
+          post.comments.unshift({
+            user,
+            username: user.name,
+            lastname: user.lastname,
+            text: commentText
+          });
+          post.save().then(savedPost => {
+            res.json(savedPost);
+          });
         });
-        post.save().then(savedPost => {
-          res.json(savedPost);
-        });
-      });
     });
   }
 );

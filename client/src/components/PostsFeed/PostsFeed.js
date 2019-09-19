@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import "./PostsFeed.css";
 import { addPost, fetchPosts, getPostsUser } from "../../actions/postAction";
 import PostItem from "./PostItem";
-import Moment from "moment";
 
 export class PostsFeed extends Component {
   state = {
@@ -48,7 +47,13 @@ export class PostsFeed extends Component {
           ? this.props.post.allPosts
               .slice(0)
               .reverse()
-              .map(item => <PostItem key={item._id} individualPost={item} />)
+              .map(item => (
+                <PostItem
+                  postId={item._id}
+                  key={item._id}
+                  individualPost={item}
+                />
+              ))
           : null}
       </div>
     );

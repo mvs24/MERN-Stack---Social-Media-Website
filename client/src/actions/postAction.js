@@ -46,3 +46,15 @@ export const addPost = value => dispatch => {
       })
     );
 };
+
+export const addComment = (data, postId) => dispatch => {
+  axios
+    .post("/api/posts/comment/" + postId, data)
+    .then(res => dispatch(fetchPosts()))
+    .catch(err =>
+      dispatch({
+        type: POST_ERROR,
+        payload: err.response.data
+      })
+    );
+};

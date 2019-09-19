@@ -1,3 +1,56 @@
-.postItem{
-    
+.postItem {
+}
+.singlePost {
+  border: 0.5px solid grey;
+  margin: 0.7rem;
+}
+.singlePost img {
+  width: 3rem;
+}
+.name_lastname {
+  display: flex;
+  margin-left: 0.2rem;
+}
+.name_lastname .name {
+  margin-left: 2rem;
+  cursor: pointer;
+  flex: 0 0 8%;
+  text-transform: capitalize;
+  color: rgb(43, 43, 199);
+}
+.name_lastname .lastname {
+  color: rgb(43, 43, 199);
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.text{
+    display:block;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    margin-top: -0.3rem;
+}
+
+.comments{
+    cursor: pointer;
+    color: blue;
+    font-size: 15px;
+}
+.allComment{
+    background: rgba(196, 196, 196, 0.76);
+}
+.commentPart{
+    display: flex;
+    background-color: rgba(196, 196, 196, 0.76);
+}
+.commentPart button{
+    cursor: pointer;
+    width: 20%;
+    background: rgb(164, 164, 233);
+    outline: none;
+    color: white;
+    transition: all 1s ease;
+}
+
+.commentPart button:active{
+    transform: translateY(-2px)
 }
