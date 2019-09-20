@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, SET_CURRENT_USER, LOGIN_ERROR } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, LOGIN_ERROR, SEARCHED_USER } from "./types";
 import { setAuthToken } from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
@@ -58,3 +58,18 @@ export const signOutUser = history => dispatch => {
   });
 };
 
+export const searchUser = data => dispatch => {
+
+  axios
+    .get("/api/users/searchUser/" + data.nameOfUser)
+    .then(res => dispatch({
+      type: SEARCHED_USER,
+      payload: res.data
+    }))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};

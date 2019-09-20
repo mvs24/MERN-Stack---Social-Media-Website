@@ -1,9 +1,10 @@
-import { GET_ERRORS, SET_CURRENT_USER, LOGIN_ERROR } from "../actions/types";
+import { GET_ERRORS, SET_CURRENT_USER, LOGIN_ERROR, SEARCHED_USER } from "../actions/types";
 
 const initialState = {
   errors: {},
   loginError: {},
-  user: null
+  user: null,
+  searchedUser: null
 };
 
 export default function(state = initialState, action) {
@@ -22,6 +23,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loginError: action.payload
+      }
+    case SEARCHED_USER:
+      return {
+        ...state,
+        searchedUser: action.payload
       }
     default:
       return state;

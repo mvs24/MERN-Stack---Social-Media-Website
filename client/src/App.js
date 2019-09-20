@@ -8,6 +8,8 @@ import { setCurrentUser } from "./actions/userActions";
 import store from "./store";
 import Home from "./components/Home/Home";
 import Auth from "./utils/Auth";
+import Likes from "./components/Likes/Likes";
+import SearchedUser from "./components/SearchedUser/SearchedUser";
 
 function App() {
   if (localStorage.jwtToken) {
@@ -22,7 +24,12 @@ function App() {
       <Route path="/" exact component={SignUp} />
       <Switch>
         <Auth path="/home" exact component={Home} />
+        <Auth path="/:individualPost" exact component={Likes} />
+        <Auth path="/searchedUsers/:searchedUserParam" exact component={SearchedUser} />
       </Switch>
+      {/* <Switch>
+        <Auth path="/:individualPost" exact component={Likes} />
+      </Switch> */}
     </BrowserRouter>
   );
 }

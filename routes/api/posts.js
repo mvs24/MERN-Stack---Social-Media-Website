@@ -31,6 +31,15 @@ router.get(
   }
 );
 
+router.get('/post/:postId',
+passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.find({ _id: req.params.postId }).populate('user').then(post => {
+      return res.json(post);
+    });
+  }
+)
+
 // 2
 router.post(
   "/",
@@ -74,23 +83,34 @@ router.post(
 
 // 4
 router.post(
-  "/like/:postId",
+  "/post/like/:postId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     User.findOne({ _id: req.user._id }).then(user => {
       Post.findOne({ _id: req.params.postId }).then(post => {
-        console.log(post.likes[0].user);
-        if (post.likes[0].user.toString() == req.user._id) {
-          return res.json({ alreadyLiked: "Post already liked" });
+        let duplicate = null;
+        post.likes.forEach(postLike => {
+          if (postLike.user.toString() == user._id) {
+            duplicate = postLike;
+          }
+        });
+        if (duplicate) {
+         post.likes = post.likes.filter(postLike => postLike !== duplicate);
+
+          post.save().then(savedPost => {
+            res.json(savedPost);
+          });
+        } else {
+          post.likes.unshift({
+            user,
+            username: user.name,
+            lastname: user.lastname
+          });
+
+          post.save().then(savedPost => {
+            res.json(savedPost);
+          });
         }
-        post.likes.unshift({
-          user,
-          username: user.name,
-          lastname: user.lastname
-        });
-        post.save().then(savedPost => {
-          res.json(savedPost);
-        });
       });
     });
   }

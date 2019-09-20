@@ -69,6 +69,37 @@ router.post("/login", (req, res) => {
   });
 });
 
+
+router.get(
+  "/searchUser/:nameOfUser",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ _id: req.user._id }).then(user => {
+      User.find({ name: req.params.nameOfUser }).then(searchedUser => {
+        if (searchedUser) {
+          return res.json(searchedUser);
+        }
+        return res.status(404).json({ noUserFound: "No user found" });
+      });
+    });
+  }
+);
+
+router.post(
+  "/request/:username",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ _id: req.user._id }).then(user => {
+      User.findOne({ name: req.params.username }).then(requestedUser => {
+        if (requestedUser) {
+          user.requests.unshift(requestedUser);
+        }
+        user.save().then(savedUser=> res.json(savedUser))
+      });
+    });
+  }
+);
+
 router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),
@@ -81,6 +112,5 @@ router.get(
     });
   }
 );
-
 
 module.exports = router;

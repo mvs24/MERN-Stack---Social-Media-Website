@@ -4,7 +4,9 @@ import Image from "../../assets/images/Marius.jpg";
 import "./PostItem.css";
 import { addComment } from "../../actions/postAction";
 import CommentItem from "./CommentItem";
-import Moment from 'react-moment'
+import Moment from "react-moment";
+import { addLikeToComment, getPostsUser } from "../../actions/postAction";
+import { Link } from "react-router-dom";
 
 export class PostItem extends Component {
   state = {
@@ -32,13 +34,15 @@ export class PostItem extends Component {
     });
   };
 
-  reverseArray(arr) {
-    return arr.splice(0).reverse();
-  }
+  likePost = id => {
+    this.props.addLikeToComment(id);
+    this.props.getPostsUser(this.props.user.user.id);
+  };
 
   render() {
-    // hours left?????????????????????????????????
-    // console.log(this.props.individualPost)
+    const newTo = { 
+      pathname: `${this.props.individualPost._id}` 
+    };
     return (
       <div className="postItem">
         <div className="singlePost">
@@ -48,15 +52,34 @@ export class PostItem extends Component {
             <p className="lastname">
               {this.props.individualPost.user.lastname}
             </p>
-            <Moment style={{fontSize:'13px', color: 'gray', marginLeft: '20px'}} format='LLL'>{this.props.individualPost.date}</Moment>
+            <Moment
+              style={{ fontSize: "13px", color: "gray", marginLeft: "20px" }}
+              format="LLL"
+            >
+              {this.props.individualPost.date}
+            </Moment>
           </div>
           <span className="text">{this.props.individualPost.text}</span>
           <form onSubmit={this.onSubmit}>
             <div>
               <span className="comments" onClick={this.changeArea}>
-                Comments
+                Comments ({this.props.individualPost.comments.length})
               </span>
 
+              <span
+                onClick={() => this.likePost(this.props.individualPost._id)}
+                style={{ marginLeft: "300px" }}
+                className="comments"
+              >
+                Like ({this.props.individualPost.likes.length})
+              </span>
+             
+              <Link
+               
+                to={newTo}
+              >
+                <i className="fas fa-arrow-right"></i>
+              </Link>
               {this.state.openComments && (
                 <div className="allComment">
                   <div className="commentPart">
@@ -104,9 +127,11 @@ export class PostItem extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.user
+});
 
 export default connect(
   mapStateToProps,
-  { addComment }
+  { addComment, addLikeToComment, getPostsUser }
 )(PostItem);
