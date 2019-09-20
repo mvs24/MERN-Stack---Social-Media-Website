@@ -4,6 +4,7 @@ import Image from "../../assets/images/Marius.jpg";
 import "./PostItem.css";
 import { addComment } from "../../actions/postAction";
 import CommentItem from "./CommentItem";
+import Moment from 'react-moment'
 
 export class PostItem extends Component {
   state = {
@@ -37,6 +38,7 @@ export class PostItem extends Component {
 
   render() {
     // hours left?????????????????????????????????
+    // console.log(this.props.individualPost)
     return (
       <div className="postItem">
         <div className="singlePost">
@@ -46,6 +48,7 @@ export class PostItem extends Component {
             <p className="lastname">
               {this.props.individualPost.user.lastname}
             </p>
+            <Moment style={{fontSize:'13px', color: 'gray', marginLeft: '20px'}} format='LLL'>{this.props.individualPost.date}</Moment>
           </div>
           <span className="text">{this.props.individualPost.text}</span>
           <form onSubmit={this.onSubmit}>
