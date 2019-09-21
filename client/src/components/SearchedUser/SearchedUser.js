@@ -9,10 +9,13 @@ export class SearchedUser extends Component {
     });
   }
   render() {
+    //   not finished
+    
     const searchedUser = this.props.user.searchedUser
       ? this.props.user.searchedUser
       : null;
     // console.log(searchedUser);
+    
     if (!searchedUser) {
       return <div></div>;
     }
