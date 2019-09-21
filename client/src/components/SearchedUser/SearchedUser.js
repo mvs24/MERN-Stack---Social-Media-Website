@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { searchUser } from "../../actions/userActions";
 import UserCard from '../UserCard/UserCard'
 import Navbar from '../Navbar/Navbar'
+
 export class SearchedUser extends Component {
   componentDidMount() {
     this.props.searchUser({

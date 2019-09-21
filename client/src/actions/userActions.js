@@ -5,7 +5,8 @@ import {
   LOGIN_ERROR,
   SEARCHED_USER,
   USER,
-  USER_POST
+  USER_POST,
+  CURRENT_USER
 } from "./types";
 import { setAuthToken } from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
@@ -108,3 +109,13 @@ export const getUserProfile = userId => dispatch => {
       })
     );;
 };
+export const getCurrentUser = ()=>dispatch=>{
+  axios.get('/api/users/current').then(res=>dispatch({
+    type: CURRENT_USER,
+    payload: res.data
+  }))
+}
+
+export const requestFriend =(userId) => dispatch => {
+  console.log(userId)
+}

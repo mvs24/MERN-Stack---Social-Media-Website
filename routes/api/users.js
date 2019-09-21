@@ -91,6 +91,9 @@ router.post(
   (req, res) => {
     User.findOne({ _id: req.user._id }).then(user => {
       User.findOne({ _id: req.params.userId }).then(requestedUser => {
+        if(user._id.toString() == requestedUser._id.toString()) {
+          return res.status(400).json({cantRequest: 'Can not request yourself'})
+        }
         if (requestedUser) {
           user.requests.unshift(requestedUser);
         }
