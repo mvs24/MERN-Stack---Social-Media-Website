@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { searchUser } from "../../actions/userActions";
-
+import UserCard from '../UserCard/UserCard'
+import Navbar from '../Navbar/Navbar'
 export class SearchedUser extends Component {
   componentDidMount() {
     this.props.searchUser({
@@ -10,19 +11,27 @@ export class SearchedUser extends Component {
   }
   render() {
     //   not finished
+  
     
     const searchedUser = this.props.user.searchedUser
       ? this.props.user.searchedUser
       : null;
-    // console.log(searchedUser);
+    console.log(searchedUser);
     
     if (!searchedUser) {
       return <div></div>;
     }
     return (
       <div>
+        {" "}
+        <Navbar />
         {searchedUser.map(user => (
-          <div key={user._id}>{user.name}</div>
+          <UserCard
+            key={user._id}
+            name={user.name}
+            lastname={user.lastname}
+            userId={user._id}
+          />
         ))}
       </div>
     );

@@ -7,6 +7,7 @@ const secret = require("../../secret/keys");
 const passport = require("passport");
 
 const User = require("../../models/User");
+const Post = require("../../models/Post");
 const { validateUser } = require("../../validation/user");
 
 router.post("/signup", (req, res) => {
@@ -69,7 +70,6 @@ router.post("/login", (req, res) => {
   });
 });
 
-
 router.get(
   "/searchUser/:nameOfUser",
   passport.authenticate("jwt", { session: false }),
@@ -86,15 +86,15 @@ router.get(
 );
 
 router.post(
-  "/request/:username",
+  "/request/:userId",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     User.findOne({ _id: req.user._id }).then(user => {
-      User.findOne({ name: req.params.username }).then(requestedUser => {
+      User.findOne({ _id: req.params.userId }).then(requestedUser => {
         if (requestedUser) {
           user.requests.unshift(requestedUser);
         }
-        user.save().then(savedUser=> res.json(savedUser))
+        user.save().then(savedUser => res.json(savedUser));
       });
     });
   }
@@ -109,6 +109,32 @@ router.get(
       name: req.user.name,
       lastname: req.user.lastname,
       email: req.user.email
+    });
+  }
+);
+
+router.get(
+  "/currentUser/:userId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    User.findOne({ _id: req.params.userId }).then(user => {
+      if (!user) {
+        return res.status(404).json({ notFound: "User not found" });
+      }
+      return res.status(200).json(user);
+    });
+  }
+);
+
+router.get(
+  "/currentUserPosts/:userId",
+  // passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.find().then(posts => {
+      let ourPost = posts.filter(
+        post => post.user.toString() == req.params.userId
+      );
+      return res.status(200).json(ourPost);
     });
   }
 );

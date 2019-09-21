@@ -8,3 +8,5 @@ export const POST_ERROR = "POST_ERROR";
 export const GET_POSTS = "GET_POSTS";
 export const GET_POST = "GET_POST";
 export const SEARCHED_USER = "SEARCHED_USER";
+export const USER = "USER";
+export const USER_POST = "USER_POST";

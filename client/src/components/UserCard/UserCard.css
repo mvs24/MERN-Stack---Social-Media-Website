@@ -1,0 +1,16 @@
+.cardUser{
+    display: flex;
+    margin: 1rem;
+}
+.cardUser img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+.info{
+    display: flex;
+    
+}
+.imgContainer{
+    margin-right: 1rem;
+}
