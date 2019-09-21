@@ -117,5 +117,5 @@ export const getCurrentUser = ()=>dispatch=>{
 }
 
 export const requestFriend =(userId) => dispatch => {
-  console.log(userId)
+  // axios.post('/api/users/')
 }

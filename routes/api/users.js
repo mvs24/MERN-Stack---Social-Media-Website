@@ -91,11 +91,19 @@ router.post(
   (req, res) => {
     User.findOne({ _id: req.user._id }).then(user => {
       User.findOne({ _id: req.params.userId }).then(requestedUser => {
-        if(user._id.toString() == requestedUser._id.toString()) {
-          return res.status(400).json({cantRequest: 'Can not request yourself'})
-        }
+        let request = requestedUser;
         if (requestedUser) {
-          user.requests.unshift(requestedUser);
+          let duplicate = -1;
+          user.requests.forEach((userReq, i) => {
+            if (userReq._id.toString() == requestedUser._id.toString()) {
+              duplicate = i;
+            }
+          });
+          if (duplicate >= 0) {
+            user.requests.splice(duplicate, 1);
+          } else if (duplicate === -1) {
+            user.requests.unshift(request);
+          }
         }
         user.save().then(savedUser => res.json(savedUser));
       });
