@@ -21,8 +21,7 @@ export class Profile extends Component {
             {this.props.post.postsUser
               ? this.props.post.postsUser.reduce(function(acc, current) {
                   return acc + current.likes.length;
-                }, 0)
-              : null}
+                }, 0) : null}
           </div>
         </div>
       </div>
